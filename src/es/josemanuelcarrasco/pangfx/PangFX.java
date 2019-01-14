@@ -23,7 +23,7 @@ public class PangFX extends Application {
     public void start(Stage primaryStage) {
         
         int ancho = 400;
-        int alto = 400;
+        int alto = 500;
         Rectangle Sombrero = new Rectangle(50, 50, 50, 60);
         
         Pane root = new Pane();
