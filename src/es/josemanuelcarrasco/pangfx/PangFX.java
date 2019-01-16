@@ -26,16 +26,19 @@ public class PangFX extends Application {
         
         int ancho = 1366;
         int alto = 768;
-        Rectangle ContornoVertical = new Rectangle(0, 0, 15, 1500);
+        Rectangle ContornoVertical = new Rectangle(0, 0, 15, 600);
         ContornoVertical.setFill(Color.GREENYELLOW);
-        Rectangle ContornoVertical2 = new Rectangle(1349,0,1366,780);
+        Rectangle ContornoVertical2 = new Rectangle(1349,0,1366,600);
         ContornoVertical2.setFill(Color.GREENYELLOW);
         Rectangle ContornoHorizontal = new Rectangle(0,0,1366,15);
         ContornoHorizontal.setFill(Color.GREENYELLOW);
-        Rectangle ContornoHorizontal2 = new Rectangle(0,703,1366,15);
+        Rectangle ContornoHorizontal2 = new Rectangle(0,600,1366,15);
         ContornoHorizontal2.setFill(Color.GREENYELLOW);
-        Rectangle Cielo = new Rectangle(15,15,1334,500);
+        Rectangle Cielo = new Rectangle(15,15,1334,585);
         Cielo.setFill(Color.LIGHTSKYBLUE);
+        Rectangle Cajetin = new Rectangle (0,615,1366,110);
+        Cajetin.setFill(Color.SLATEGRAY);
+        Circle Nube1 = new Circle(160, 200,30);   
         
         Pane root = new Pane();
         root.getChildren().add(ContornoVertical);
@@ -43,6 +46,8 @@ public class PangFX extends Application {
         root.getChildren().add(ContornoHorizontal);
         root.getChildren().add(ContornoHorizontal2);
         root.getChildren().add(Cielo);
+        root.getChildren().add(Cajetin);
+        root.getChildren().add(Nube1);
         
         Scene scene = new Scene (root, ancho, alto);
         
