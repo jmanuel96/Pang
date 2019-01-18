@@ -44,7 +44,11 @@ public class PangFX extends Application {
         
         // Elementos del Cajetin del juego
         Rectangle Cajetin = new Rectangle (0,615,1366,110);
-        Cajetin.setFill(Color.SLATEGRAY); 
+        Cajetin.setFill(Color.SLATEGRAY);
+        
+        //Elementos del Cajetin de la vida
+        //Rectangle cajetinvida = new Rectangle (80,630,120,50);
+        //cajetinvida.setFill(Color.WHITE);
         
         // Elementos de la montaña del juego
         Polygon poligonomontaña = new Polygon (new double[]{
@@ -70,8 +74,17 @@ public class PangFX extends Application {
         Circle elementonube8 = new Circle (940,200,25);
         
         // Elementos para la creacion de las vidas
-        
+        Polygon cuerpovida = new Polygon (new double[]{
+            120.0, 650.0,
+            145.0, 650.0,
+            140.0, 630.0,
+            125.0, 630.0});
+        Circle cabezavida = new Circle (132.5,624,7.5);
         Group vida = new Group();
+        
+        // Pintar vida
+        cabezavida.setFill(Color.BISQUE);
+        cuerpovida.setFill(Color.SKYBLUE);
         
         
         
@@ -109,6 +122,10 @@ public class PangFX extends Application {
         root.getChildren().add(elementonube6);
         root.getChildren().add(elementonube7);
         root.getChildren().add(elementonube8);
+        
+        root.getChildren().add(cuerpovida);
+        root.getChildren().add(cabezavida);
+        //root.getChildren().add(cajetinvida);
         
         
         Scene scene = new Scene (root, ancho, alto);
