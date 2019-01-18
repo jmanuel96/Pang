@@ -6,6 +6,7 @@
 package es.josemanuelcarrasco.pangfx;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -62,6 +63,17 @@ public class PangFX extends Application {
         Circle elementonube1 = new Circle (200,150,25);
         Circle elementonube2 = new Circle (225,150,20);
         Circle elementonube3 = new Circle (175,150,18);
+        Circle elementonube4 = new Circle (975,200,40);
+        Circle elementonube5 = new Circle (1030,200,50);
+        Circle elementonube6 = new Circle (1075,200,40);
+        Circle elementonube7 = new Circle (1115,200,25);
+        Circle elementonube8 = new Circle (940,200,25);
+        
+        // Elementos para la creacion de las vidas
+        Group vida = new Group();
+        
+        
+        
         
         // Colores de la Montaña
         nievemontaña.setFill(Color.WHITE);
@@ -71,6 +83,11 @@ public class PangFX extends Application {
         elementonube1.setFill(Color.WHITE);
         elementonube2.setFill(Color.WHITE);
         elementonube3.setFill(Color.WHITE);
+        elementonube4.setFill(Color.WHITE);
+        elementonube5.setFill(Color.WHITE);
+        elementonube6.setFill(Color.WHITE);
+        elementonube7.setFill(Color.WHITE);
+        elementonube8.setFill(Color.WHITE);
         
         
         
@@ -86,6 +103,12 @@ public class PangFX extends Application {
         root.getChildren().add(elementonube1);
         root.getChildren().add(elementonube2);
         root.getChildren().add(elementonube3);
+        root.getChildren().add(elementonube4);
+        root.getChildren().add(elementonube5);
+        root.getChildren().add(elementonube6);
+        root.getChildren().add(elementonube7);
+        root.getChildren().add(elementonube8);
+        
         
         Scene scene = new Scene (root, ancho, alto);
         
