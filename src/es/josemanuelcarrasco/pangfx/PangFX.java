@@ -70,6 +70,7 @@ public class PangFX extends Application {
         Circle elementonube8 = new Circle (940,200,25);
         
         // Elementos para la creacion de las vidas
+        
         Group vida = new Group();
         
         
