@@ -74,17 +74,25 @@ public class PangFX extends Application {
         Circle elementonube8 = new Circle (940,200,25);
         
         // Elementos para la creacion de las vidas
-        Polygon cuerpovida = new Polygon (new double[]{
+            Polygon cuerpovida = new Polygon (new double[]{
             120.0, 650.0,
             145.0, 650.0,
             140.0, 630.0,
             125.0, 630.0});
         Circle cabezavida = new Circle (132.5,624,7.5);
-        Group vida = new Group();
+        // Group vida = new Group();
+            Polygon cuerpovida2 = new Polygon (new double[]{
+            150.0, 650.0,
+            175.0, 650.0,
+            170.0, 630.0,
+            155.0, 630.0});
+        Circle cabezavida2 = new Circle (162.5,624,7.5);
         
         // Pintar vida
         cabezavida.setFill(Color.BISQUE);
         cuerpovida.setFill(Color.SKYBLUE);
+        cabezavida2.setFill(Color.BISQUE);
+        cuerpovida2.setFill(Color.SKYBLUE);
         
         
         
@@ -125,12 +133,12 @@ public class PangFX extends Application {
         
         root.getChildren().add(cuerpovida);
         root.getChildren().add(cabezavida);
-        //root.getChildren().add(cajetinvida);
-        
+        root.getChildren().add(cuerpovida2);
+        root.getChildren().add(cabezavida2);
         
         Scene scene = new Scene (root, ancho, alto);
         
-        primaryStage.setTitle("SombreroFX");
+        primaryStage.setTitle("PangFX");
         primaryStage.setScene(scene);
         primaryStage.show();
 
