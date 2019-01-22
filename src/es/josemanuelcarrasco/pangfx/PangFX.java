@@ -5,6 +5,7 @@
  */
 package es.josemanuelcarrasco.pangfx;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -74,14 +77,14 @@ public class PangFX extends Application {
         Circle elementonube8 = new Circle (940,200,25);
         
         // Elementos para la creacion de las vidas
-            Polygon cuerpovida = new Polygon (new double[]{
+        Polygon cuerpovida = new Polygon (new double[]{
             120.0, 650.0,
             145.0, 650.0,
             140.0, 630.0,
             125.0, 630.0});
         Circle cabezavida = new Circle (132.5,624,7.5);
-        // Group vida = new Group();
-            Polygon cuerpovida2 = new Polygon (new double[]{
+
+        Polygon cuerpovida2 = new Polygon (new double[]{
             150.0, 650.0,
             175.0, 650.0,
             170.0, 630.0,
@@ -93,8 +96,6 @@ public class PangFX extends Application {
         cuerpovida.setFill(Color.SKYBLUE);
         cabezavida2.setFill(Color.BISQUE);
         cuerpovida2.setFill(Color.SKYBLUE);
-        
-        
         
         
         // Colores de la Montaña
@@ -110,6 +111,41 @@ public class PangFX extends Application {
         elementonube6.setFill(Color.WHITE);
         elementonube7.setFill(Color.WHITE);
         elementonube8.setFill(Color.WHITE);
+        
+        // Texto puntuacion
+        Text puntuacion = new Text(118,690,"Puntuación: 0");
+        puntuacion.setFont(new Font(30));
+        puntuacion.setFill(Color.WHITE);
+        
+        // Texto Ubicacion
+        Text ubicacion = new Text(570, 650,"MONTE FUJI");
+        ubicacion.setFont(new Font(30));
+        ubicacion.setFill(Color.WHITE);
+        
+        
+        // Poligonos adorno
+        Polygon adorno1 = new Polygon (new double[]{
+            25.0, 660.0,
+            75.0, 660.0,
+            50.0, 630.0});
+        Polygon adorno2 = new Polygon (new double[]{
+            25.0, 660.0,
+            75.0, 660.0,
+            50.0, 690.0});
+        Polygon adorno3 = new Polygon (new double[]{
+            1341.0, 660.0,
+            1291.0, 660.0,
+            1316.0, 630.0});
+        Polygon adorno4 = new Polygon (new double[]{
+            1341.0, 660.0,
+            1291.0, 660.0,
+            1316.0, 690.0});
+        
+        // Pintar los adornos
+        adorno1.setFill(Color.RED);
+        adorno2.setFill(Color.YELLOW);
+        adorno3.setFill(Color.YELLOW);
+        adorno4.setFill(Color.RED);
         
         
         
@@ -136,11 +172,30 @@ public class PangFX extends Application {
         root.getChildren().add(cuerpovida2);
         root.getChildren().add(cabezavida2);
         
+        root.getChildren().add(puntuacion);
+        root.getChildren().add(ubicacion);
+        
+        root.getChildren().add(adorno1);
+        root.getChildren().add(adorno2);
+        root.getChildren().add(adorno3);
+        root.getChildren().add(adorno4);
+        
+        
+        
         Scene scene = new Scene (root, ancho, alto);
         
         primaryStage.setTitle("PangFX");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        AnimationTimer protagonista = new AnimationTimer(){
+            @Override
+            public void handle(long now) {
+                
+            }
+            
+        };
+        protagonista.start();
 
         
     }
