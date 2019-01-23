@@ -9,6 +9,8 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -118,7 +120,7 @@ public class PangFX extends Application {
         puntuacion.setFill(Color.WHITE);
         
         // Texto Ubicacion
-        Text ubicacion = new Text(570, 650,"MONTE FUJI");
+        Text ubicacion = new Text((ancho/2)- 80, 650,"MONTE FUJI");
         ubicacion.setFont(new Font(30));
         ubicacion.setFill(Color.WHITE);
         
@@ -147,8 +149,19 @@ public class PangFX extends Application {
         adorno3.setFill(Color.YELLOW);
         adorno4.setFill(Color.RED);
         
+        // Enemigo
+        Circle enemigo = new Circle (180, 200, 70);
+        enemigo.setFill(Color.DARKRED);
+        
+        Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
+        ImageView imageView1 = new ImageView(inicial);
+        imageView1.setX((ancho/2)- 15);
+        imageView1.setY(555);
+        imageView1.setScaleX(2);
+        imageView1.setScaleY(2);
         
         
+        // Codigos para incluir los elementos anteriormente realizados
         Pane root = new Pane();
         root.getChildren().add(ContornoVertical);
         root.getChildren().add(ContornoVertical2);
@@ -180,6 +193,10 @@ public class PangFX extends Application {
         root.getChildren().add(adorno3);
         root.getChildren().add(adorno4);
         
+        root.getChildren().add(imageView1);
+        
+        root.getChildren().add(enemigo);
+        
         
         
         Scene scene = new Scene (root, ancho, alto);
@@ -188,14 +205,14 @@ public class PangFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        AnimationTimer protagonista = new AnimationTimer(){
+        AnimationTimer enemigobola = new AnimationTimer(){
             @Override
             public void handle(long now) {
                 
             }
             
         };
-        protagonista.start();
+        enemigobola.start();
 
         
     }
