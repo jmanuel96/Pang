@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,6 +27,13 @@ import javafx.stage.Stage;
  * @author josemanuel
  */
 public class PangFX extends Application {
+    
+    int enemigobolaX = 10;
+    int enemigobolaY = 50;
+    int velocidadbolaX = 0;
+    int velocidadbolaY = 0;
+    AnimationTimer enemigobola;
+    
     
     @Override
     public void start(Stage primaryStage) {
@@ -50,10 +58,6 @@ public class PangFX extends Application {
         // Elementos del Cajetin del juego
         Rectangle Cajetin = new Rectangle (0,615,1366,110);
         Cajetin.setFill(Color.SLATEGRAY);
-        
-        //Elementos del Cajetin de la vida
-        //Rectangle cajetinvida = new Rectangle (80,630,120,50);
-        //cajetinvida.setFill(Color.WHITE);
         
         // Elementos de la montaña del juego
         Polygon poligonomontaña = new Polygon (new double[]{
@@ -98,8 +102,7 @@ public class PangFX extends Application {
         cuerpovida.setFill(Color.SKYBLUE);
         cabezavida2.setFill(Color.BISQUE);
         cuerpovida2.setFill(Color.SKYBLUE);
-        
-        
+               
         // Colores de la Montaña
         nievemontaña.setFill(Color.WHITE);
         poligonomontaña.setFill(Color.DARKSLATEGREY);
@@ -123,8 +126,7 @@ public class PangFX extends Application {
         Text ubicacion = new Text((ancho/2)- 80, 650,"MONTE FUJI");
         ubicacion.setFont(new Font(30));
         ubicacion.setFill(Color.WHITE);
-        
-        
+                
         // Poligonos adorno
         Polygon adorno1 = new Polygon (new double[]{
             25.0, 660.0,
@@ -152,15 +154,15 @@ public class PangFX extends Application {
         // Enemigo
         Circle enemigo = new Circle (180, 200, 70);
         enemigo.setFill(Color.DARKRED);
-        
+                
+        // Pasos para introducir una imagen
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
         ImageView imageView1 = new ImageView(inicial);
         imageView1.setX((ancho/2)- 15);
         imageView1.setY(555);
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
-        
-        
+              
         // Codigos para incluir los elementos anteriormente realizados
         Pane root = new Pane();
         root.getChildren().add(ContornoVertical);
@@ -205,11 +207,25 @@ public class PangFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        AnimationTimer enemigobola = new AnimationTimer(){
+        enemigobola = new AnimationTimer(){
             @Override
             public void handle(long now) {
+
+                enemigo.setLayoutY(velocidadbolaY);
+                System.out.println(velocidadbolaX);
+                
+            Shape colisionpared = Shape.intersect(enemigo, ContornoHorizontal2);
+            boolean colisionNula = colisionpared.getBoundsInLocal().isEmpty();
+            
+            if (colisionNula == false){
+                velocidadbolaY -=3;
+            }
+            else {
                 
             }
+            
+                
+            };
             
         };
         enemigobola.start();
