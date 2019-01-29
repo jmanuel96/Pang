@@ -210,23 +210,29 @@ public class PangFX extends Application {
             @Override
             public void handle(long now) {
 
-                enemigo.setLayoutX(velocidadbolaX);
-                enemigo.setLayoutY(velocidadbolaY);
+                enemigo.setLayoutX(posicionbolaX);
+                enemigo.setLayoutY(posicionbolaY);
                 System.out.println(velocidadbolaX+"X");
                 System.out.println(velocidadbolaY+"Y");
                 
             Shape colisionpared = Shape.intersect(enemigo,ContornoHorizontal2);
             boolean colisionNula = colisionpared.getBoundsInLocal().isEmpty();
            
-            
+            posicionbolaX += velocidadbolaX;
+            posicionbolaY += velocidadbolaY;
           
             if (colisionNula == false){
+              
+                velocidadbolaX +=2;
+                    posicionbolaX +=2;
+                velocidadbolaY -=2;
+                    posicionbolaY -=2;
                 
-                velocidadbolaY -= posicionbolaY;
             }
-            else {
+            else if (colisionNula == true) {
                 
-                velocidadbolaY  posicionbolaY;
+                velocidadbolaX;
+                
             }
             
                 
