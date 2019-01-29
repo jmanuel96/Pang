@@ -28,10 +28,10 @@ import javafx.stage.Stage;
  */
 public class PangFX extends Application {
     
-    int enemigobolaX = 180;
-    int enemigobolaY = 100;
-    int velocidadbolaX = 0;
-    int velocidadbolaY = 0;
+    int posicionbolaX = 180;
+    int posicionbolaY = 100;
+    int velocidadbolaX = 5;
+    int velocidadbolaY = 5;
     AnimationTimer enemigobola;
     
     
@@ -152,7 +152,7 @@ public class PangFX extends Application {
         adorno4.setFill(Color.RED);
         
         // Enemigo
-        Circle enemigo = new Circle(enemigobolaX,enemigobolaY,70,Color.DARKRED);
+        Circle enemigo = new Circle(posicionbolaX,posicionbolaY,70,Color.DARKRED);
                 
         // Pasos para introducir una imagen
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -217,17 +217,17 @@ public class PangFX extends Application {
                 
             Shape colisionpared = Shape.intersect(enemigo,ContornoHorizontal2);
             boolean colisionNula = colisionpared.getBoundsInLocal().isEmpty();
-                velocidadbolaX +=1;
-                velocidadbolaY +=5; 
+           
             
-            if (colisionNula == false){ 
-                velocidadbolaX +=1;
-                velocidadbolaY -=5;
+          
+            if (colisionNula == false){
                 
+                velocidadbolaY -= posicionbolaY;
             }
-           // else {
+            else {
                 
-            //}
+                velocidadbolaY  posicionbolaY;
+            }
             
                 
             };
