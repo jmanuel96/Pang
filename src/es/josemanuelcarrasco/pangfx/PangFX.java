@@ -28,11 +28,11 @@ import javafx.stage.Stage;
  */
 public class PangFX extends Application {
     
-    int posicionbolaX = 180;
-    int posicionbolaY = 100;
-    int velocidadbolaX = 5;
-    int velocidadbolaY = 5;
-    AnimationTimer enemigobola;
+    int posicionBolaX = 180;
+    int posicionBolaY = 100;
+    int velocidadBolaX = 5;
+    int velocidadBolaY = 5;
+    AnimationTimer enemigoBola;
     
     
     @Override
@@ -152,7 +152,7 @@ public class PangFX extends Application {
         adorno4.setFill(Color.RED);
         
         // Enemigo
-        Circle enemigo = new Circle(posicionbolaX,posicionbolaY,70,Color.DARKRED);
+        Circle enemigo = new Circle(posicionBolaX,posicionBolaY,70,Color.DARKRED);
                 
         // Pasos para introducir una imagen
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -206,49 +206,54 @@ public class PangFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        enemigobola = new AnimationTimer(){
+        enemigoBola = new AnimationTimer(){
             @Override
             public void handle(long now) {
 
-                enemigo.setLayoutX(posicionbolaX);
-                enemigo.setLayoutY(posicionbolaY);
-                System.out.println(velocidadbolaX+"X");
-                System.out.println(velocidadbolaY+"Y");
+                enemigo.setLayoutX(posicionBolaX);
+                enemigo.setLayoutY(posicionBolaY);
+                System.out.println(velocidadBolaX+"X");
+                System.out.println(velocidadBolaY+"Y");
                 
-            Shape colisionpared = Shape.intersect(enemigo,ContornoHorizontal2);
-            boolean colisionNula = colisionpared.getBoundsInLocal().isEmpty();
+            Shape colisionPared = Shape.intersect(enemigo,ContornoHorizontal2);
+            boolean colisionNula = colisionPared.getBoundsInLocal().isEmpty();
            
-            posicionbolaX += velocidadbolaX;
-            posicionbolaY += velocidadbolaY;
+            posicionBolaX += velocidadBolaX;
+            posicionBolaY += velocidadBolaY;
           
             if (colisionNula == false){
               
-                velocidadbolaX +=2;
-                    posicionbolaX +=2;
-                velocidadbolaY -=2;
-                    posicionbolaY -=2;
+                velocidadBolaX +=1;
+                posicionBolaX +=1;
+                velocidadBolaY -=1;
+                posicionBolaY -=1;
                 
             }
-            else if (colisionNula == true) {
-                
-                velocidadbolaX;
-                
-            }
+            Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical);
+            boolean colisionNula2 = colisionPared2.getBoundsInLocal().isEmpty();
             
-                
-            };
+                posicionBolaX += velocidadBolaX;
+                posicionBolaY += velocidadBolaY;
+
+            if (colisionNula2 == false){
+
+                velocidadBolaX -=2;
+                posicionBolaX -=2;
+                velocidadBolaY +=2;
+                posicionBolaY +=2;
+                   
+            }
             
         };
-        enemigobola.start();
-
         
-    }
-
+    };
+        
+    enemigoBola.start();
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         launch(args);
     }
-    
-}
+    };
