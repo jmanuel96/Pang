@@ -30,8 +30,8 @@ public class PangFX extends Application {
     
     int posicionBolaX = 180;
     int posicionBolaY = 100;
-    int velocidadBolaX = 5;
-    int velocidadBolaY = 5;
+    int velocidadBolaX = 3;
+    int velocidadBolaY = 3;
     AnimationTimer enemigoBola;
     
     
@@ -214,41 +214,55 @@ public class PangFX extends Application {
                 enemigo.setLayoutY(posicionBolaY);
                 System.out.println(velocidadBolaX+"X");
                 System.out.println(velocidadBolaY+"Y");
-                
+            
+            // Cambiamos la posicion de la bola    
+            posicionBolaX += velocidadBolaX;
+            posicionBolaY += velocidadBolaY; 
+
+            // Pasos para hacer la colision con la Cara Horizontal Inferior
             Shape colisionPared = Shape.intersect(enemigo,ContornoHorizontal2);
             boolean colisionNula = colisionPared.getBoundsInLocal().isEmpty();
-           
-            posicionBolaX += velocidadBolaX;
-            posicionBolaY += velocidadBolaY;
-          
+                   
             if (colisionNula == false){
               
-                velocidadBolaX +=1;
-                posicionBolaX +=1;
-                velocidadBolaY -=1;
-                posicionBolaY -=1;
+                velocidadBolaY = -3;
+
                 
             }
-            Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical);
+            Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical2);
             boolean colisionNula2 = colisionPared2.getBoundsInLocal().isEmpty();
             
-                posicionBolaX += velocidadBolaX;
-                posicionBolaY += velocidadBolaY;
 
             if (colisionNula2 == false){
 
-                velocidadBolaX -=2;
-                posicionBolaX -=2;
-                velocidadBolaY +=2;
-                posicionBolaY +=2;
-                   
+                velocidadBolaX = -3;
+                
+                }
+            
+            Shape colisionPared3 = Shape.intersect(enemigo,ContornoHorizontal);
+            boolean colisionNula3 = colisionPared3.getBoundsInLocal().isEmpty();
+            
+            if (colisionNula3 == false){
+                
+                velocidadBolaY = 3;
+            }
+                
+            Shape colisionPared4 = Shape.intersect(enemigo,ContornoVertical);
+            boolean colisionNula4 = colisionPared4.getBoundsInLocal().isEmpty();
+            
+            if (colisionNula4 == false){
+                velocidadBolaX = 3 ;
+                
+                }            
             }
             
+            
         };
+          enemigoBola.start();
         
     };
         
-    enemigoBola.start();
+  
     
     /**
      * @param args the command line arguments
