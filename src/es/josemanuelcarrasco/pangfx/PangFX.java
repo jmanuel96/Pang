@@ -153,6 +153,9 @@ public class PangFX extends Application {
         
         // Enemigo
         Circle enemigo = new Circle(posicionBolaX,posicionBolaY,70,Color.DARKRED);
+        
+        // Arma
+        Rectangle arma = new Rectangle(100,200,5,10);
                 
         // Pasos para introducir una imagen
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -198,6 +201,8 @@ public class PangFX extends Application {
         
         root.getChildren().add(enemigo);
         
+        root.getChildren().add(arma);
+        
         
         
         Scene scene = new Scene (root, ancho, alto);
@@ -219,37 +224,43 @@ public class PangFX extends Application {
             posicionBolaX += velocidadBolaX;
             posicionBolaY += velocidadBolaY; 
 
-            // Pasos para hacer la colision con la Cara Horizontal Inferior
+            // Pasos para hacer la colision de la bola con la Cara Horizontal Inferior
             Shape colisionPared = Shape.intersect(enemigo,ContornoHorizontal2);
             boolean colisionNula = colisionPared.getBoundsInLocal().isEmpty();
-                   
+            
+            // Si la colision detecta colision:       
             if (colisionNula == false){
               
                 velocidadBolaY = -3;
 
                 
             }
+            // Pasos para hacer la colision de la bola con la Cara Vertical Derecha
             Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical2);
             boolean colisionNula2 = colisionPared2.getBoundsInLocal().isEmpty();
             
-
+            // Si la colision detecta colisión:
             if (colisionNula2 == false){
 
                 velocidadBolaX = -3;
                 
                 }
             
+            // Pasos para hacer la colision de la bola con la Cara Horizontal Superior
             Shape colisionPared3 = Shape.intersect(enemigo,ContornoHorizontal);
             boolean colisionNula3 = colisionPared3.getBoundsInLocal().isEmpty();
-            
+
+            // Si la colision detecta colisión:
             if (colisionNula3 == false){
                 
                 velocidadBolaY = 3;
             }
-                
+            
+            // Pasos para hacer la colision de la bola con la Cara Vertical Izquierda
             Shape colisionPared4 = Shape.intersect(enemigo,ContornoVertical);
             boolean colisionNula4 = colisionPared4.getBoundsInLocal().isEmpty();
             
+            // Si la colision detecta colisión:
             if (colisionNula4 == false){
                 velocidadBolaX = 3 ;
                 
@@ -261,6 +272,8 @@ public class PangFX extends Application {
           enemigoBola.start();
         
     };
+    
+        
         
   
     
