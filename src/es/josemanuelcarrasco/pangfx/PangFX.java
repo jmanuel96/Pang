@@ -154,16 +154,37 @@ public class PangFX extends Application {
         // Enemigo
         Circle enemigo = new Circle(posicionBolaX,posicionBolaY,70,Color.DARKRED);
         
+        // Rectangulo Colisión Muñeco y bola
+        //Rectangle tope = new Rectangle (657,537,50,63);
+        
         // Arma
         Rectangle arma = new Rectangle(100,200,5,10);
-                
-        // Pasos para introducir una imagen
+        
+        // Grupo para poder realizar la colision del muñeco con la bola
+        Group movimientoImagen = new Group();
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
         ImageView imageView1 = new ImageView(inicial);
         imageView1.setX((ancho/2)- 15);
         imageView1.setY(555);
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
+        Rectangle tope = new Rectangle (657,537,50,63);
+        movimientoImagen.getChildren().add(imageView1);
+        movimientoImagen.getChildren().add(tope);
+        root.getChildren().add(movimientoImagen);
+                
+        // Pasos para introducir una imagen
+        //Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
+        //Image derecha = new Image(getClass().getResourceAsStream("Capa-2.gif"));
+        //Image izquierda = new Image(getClass().getResourceAsStream("Capa-1.gif"));
+        //ImageView imageView1 = new ImageView(inicial);
+        //imageView1.setX((ancho/2)- 15);
+        //imageView1.setY(555);
+        //imageView1.setScaleX(2);
+        //imageView1.setScaleY(2);
+        //imageView1.setImage(derecha);
+        //imageView1.setImage(izquierda);
+        
               
         // Codigos para incluir los elementos anteriormente realizados
         Pane root = new Pane();
@@ -200,6 +221,8 @@ public class PangFX extends Application {
         root.getChildren().add(imageView1);
         
         root.getChildren().add(enemigo);
+        
+        root.getChildren().add(tope);
         
         root.getChildren().add(arma);
         
@@ -264,7 +287,17 @@ public class PangFX extends Application {
             if (colisionNula4 == false){
                 velocidadBolaX = 3 ;
                 
-                }            
+                } 
+            
+            Shape eliminado = Shape.intersect(enemigo,tope);
+            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
+            
+            if (colisionNula5 == false){
+                
+                velocidadBolaX = 0;
+                velocidadBolaY = 0;
+            }
+            
             }
             
             
