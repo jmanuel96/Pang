@@ -171,7 +171,7 @@ public class PangFX extends Application {
         Rectangle tope = new Rectangle (657,537,50,63);
         movimientoImagen.getChildren().add(imageView1);
         movimientoImagen.getChildren().add(tope);
-        root.getChildren().add(movimientoImagen);
+        //root.getChildren().add(movimientoImagen);
                 
         // Pasos para introducir una imagen
         //Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
