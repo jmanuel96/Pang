@@ -5,6 +5,7 @@
  */
 package es.josemanuelcarrasco.pangfx;
 
+import java.awt.event.KeyEvent;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -28,6 +29,8 @@ import javafx.stage.Stage;
  */
 public class PangFX extends Application {
     
+    int ancho = 1366;
+    int alto = 768;
     int posicionBolaX = 180;
     int posicionBolaY = 100;
     int velocidadBolaX = 3;
@@ -38,8 +41,7 @@ public class PangFX extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-        int ancho = 1366;
-        int alto = 768;
+
         
         // Elementos del borde de la pantalla del juego
         Rectangle ContornoVertical = new Rectangle(0, 0, 15, 600);
@@ -171,7 +173,7 @@ public class PangFX extends Application {
         Rectangle tope = new Rectangle (657,537,50,63);
         movimientoImagen.getChildren().add(imageView1);
         movimientoImagen.getChildren().add(tope);
-        //root.getChildren().add(movimientoImagen);
+        
                 
         // Pasos para introducir una imagen
         //Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -222,9 +224,23 @@ public class PangFX extends Application {
         
         root.getChildren().add(enemigo);
         
-        root.getChildren().add(tope);
+        root.getChildren().add(movimientoImagen);
         
         root.getChildren().add(arma);
+        
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch(event.getCode()){
+                case LEFT:
+                    break;
+                case RIGHT:
+                    break;
+            }
+        });
+        
+        scene.setOnKeyReleased((KeyEvent event) -> {
+            
+        });
+        
         
         
         
@@ -305,6 +321,8 @@ public class PangFX extends Application {
           enemigoBola.start();
         
     };
+    
+    
     
         
         
