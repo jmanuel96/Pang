@@ -5,13 +5,13 @@
  */
 package es.josemanuelcarrasco.pangfx;
 
-import java.awt.event.KeyEvent;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -35,6 +35,8 @@ public class PangFX extends Application {
     int posicionBolaY = 100;
     int velocidadBolaX = 3;
     int velocidadBolaY = 3;
+    int velocidadGrupo = 0;
+    int posicionGrupo = 0;
     AnimationTimer enemigoBola;
     
     
@@ -158,9 +160,7 @@ public class PangFX extends Application {
         
         // Rectangulo Colisión Muñeco y bola
         //Rectangle tope = new Rectangle (657,537,50,63);
-        
-        // Arma
-        Rectangle arma = new Rectangle(100,200,5,10);
+             
         
         // Grupo para poder realizar la colision del muñeco con la bola
         Group movimientoImagen = new Group();
@@ -170,9 +170,11 @@ public class PangFX extends Application {
         imageView1.setY(555);
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
+        Rectangle arma = new Rectangle(677.5,528,5,10);
         Rectangle tope = new Rectangle (657,537,50,63);
         movimientoImagen.getChildren().add(imageView1);
-        movimientoImagen.getChildren().add(tope);
+        //movimientoImagen.getChildren().add(tope);
+        movimientoImagen.getChildren().add(arma);
         
                 
         // Pasos para introducir una imagen
@@ -220,31 +222,20 @@ public class PangFX extends Application {
         root.getChildren().add(adorno3);
         root.getChildren().add(adorno4);
         
-        root.getChildren().add(imageView1);
         
         root.getChildren().add(enemigo);
         
         root.getChildren().add(movimientoImagen);
         
-        root.getChildren().add(arma);
-        
-        scene.setOnKeyPressed((KeyEvent event) -> {
-            switch(event.getCode()){
-                case LEFT:
-                    break;
-                case RIGHT:
-                    break;
-            }
-        });
-        
-        scene.setOnKeyReleased((KeyEvent event) -> {
-            
-        });
-        
-        
-        
         
         Scene scene = new Scene (root, ancho, alto);
+        
+        // Cambiamos el movimiento del grupo
+
+        
+        scene.setOnKeyReleased((KeyEvent event) -> {
+            velocidadGrupo = 0;
+        });
         
         primaryStage.setTitle("PangFX");
         primaryStage.setScene(scene);
@@ -253,6 +244,23 @@ public class PangFX extends Application {
         enemigoBola = new AnimationTimer(){
             @Override
             public void handle(long now) {
+                
+            posicionGrupo += velocidadGrupo;
+            movimientoImagen.setLayoutX(posicionGrupo);
+//            imageView1.setLayoutX(posicionGrupo);
+
+        
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch(event.getCode()){
+                case LEFT:
+                    velocidadGrupo = -2;
+                            
+                    break;
+                case RIGHT:
+                    velocidadGrupo = 2;
+                    break;
+            }
+        });
 
                 enemigo.setLayoutX(posicionBolaX);
                 enemigo.setLayoutY(posicionBolaY);
@@ -305,16 +313,17 @@ public class PangFX extends Application {
                 
                 } 
             
-            Shape eliminado = Shape.intersect(enemigo,tope);
-            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
+//            Shape eliminado = Shape.intersect(enemigo,tope);
+//            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
+//            
+//            if (colisionNula5 == false){
+//                
+//                velocidadBolaX = 0;
+//                velocidadBolaY = 0;
+//            }
             
-            if (colisionNula5 == false){
-                
-                velocidadBolaX = 0;
-                velocidadBolaY = 0;
             }
             
-            }
             
             
         };
