@@ -37,6 +37,7 @@ public class PangFX extends Application {
     int velocidadBolaY = 3;
     int velocidadGrupo = 0;
     int posicionGrupo = 0;
+    int longitudArma = 0;
     AnimationTimer enemigoBola;
     
     
@@ -170,10 +171,11 @@ public class PangFX extends Application {
         imageView1.setY(555);
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
-        Rectangle arma = new Rectangle(677.5,528,5,10);
+        Rectangle arma = new Rectangle(677.5,518,5,longitudArma);
+        //arma.setRotate (180.0);
         Rectangle tope = new Rectangle (657,537,50,63);
         movimientoImagen.getChildren().add(imageView1);
-        //movimientoImagen.getChildren().add(tope);
+        movimientoImagen.getChildren().add(tope);
         movimientoImagen.getChildren().add(arma);
         
                 
@@ -233,9 +235,7 @@ public class PangFX extends Application {
         // Cambiamos el movimiento del grupo
 
         
-        scene.setOnKeyReleased((KeyEvent event) -> {
-            velocidadGrupo = 0;
-        });
+
         
         primaryStage.setTitle("PangFX");
         primaryStage.setScene(scene);
@@ -259,7 +259,14 @@ public class PangFX extends Application {
                 case RIGHT:
                     velocidadGrupo = 2;
                     break;
+                
+                case SPACE:
+                    longitudArma +=2;
+                    arma.setHeight(longitudArma);
             }
+        });
+        scene.setOnKeyReleased((KeyEvent event) -> {
+            velocidadGrupo = 0;
         });
 
                 enemigo.setLayoutX(posicionBolaX);
@@ -313,14 +320,27 @@ public class PangFX extends Application {
                 
                 } 
             
-//            Shape eliminado = Shape.intersect(enemigo,tope);
-//            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
-//            
-//            if (colisionNula5 == false){
-//                
-//                velocidadBolaX = 0;
-//                velocidadBolaY = 0;
-//            }
+            Shape eliminado = Shape.intersect(enemigo,tope);
+            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
+            
+            if (colisionNula5 == false){
+                
+                this.stop();
+            }
+
+            Shape limite1 = Shape.intersect (tope, ContornoVertical);
+            boolean colisionNula6 = limite1.getBoundsInLocal().isEmpty();
+                
+                if (colisionNula6 == false){
+                    velocidadGrupo = 2;
+                }
+                
+            Shape limite2 = Shape.intersect (tope,ContornoVertical2);
+            boolean colisionNula7 = limite2.getBoundsInLocal().isEmpty();
+            
+                if (colisionNula7 == false){
+                    velocidadGrupo = -2;
+                }
             
             }
             
