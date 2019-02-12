@@ -172,8 +172,8 @@ public class PangFX extends Application {
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
         Rectangle arma = new Rectangle(677.5,518,5,longitudArma);
-        //arma.setRotate (180.0);
-        Rectangle tope = new Rectangle (657,537,50,63);
+        Rectangle tope = new Rectangle (668,543,34,58);
+        tope.setVisible(false);
         movimientoImagen.getChildren().add(imageView1);
         movimientoImagen.getChildren().add(tope);
         movimientoImagen.getChildren().add(arma);
@@ -280,10 +280,10 @@ public class PangFX extends Application {
 
             // Pasos para hacer la colision de la bola con la Cara Horizontal Inferior
             Shape colisionPared = Shape.intersect(enemigo,ContornoHorizontal2);
-            boolean colisionNula = colisionPared.getBoundsInLocal().isEmpty();
+            boolean colisionNula = !colisionPared.getBoundsInLocal().isEmpty();
             
             // Si la colision detecta colision:       
-            if (colisionNula == false){
+            if (colisionNula == true){
               
                 velocidadBolaY = -3;
 
@@ -291,10 +291,10 @@ public class PangFX extends Application {
             }
             // Pasos para hacer la colision de la bola con la Cara Vertical Derecha
             Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical2);
-            boolean colisionNula2 = colisionPared2.getBoundsInLocal().isEmpty();
+            boolean colisionNula2 = !colisionPared2.getBoundsInLocal().isEmpty();
             
             // Si la colision detecta colisión:
-            if (colisionNula2 == false){
+            if (colisionNula2 == true){
 
                 velocidadBolaX = -3;
                 
@@ -302,43 +302,43 @@ public class PangFX extends Application {
             
             // Pasos para hacer la colision de la bola con la Cara Horizontal Superior
             Shape colisionPared3 = Shape.intersect(enemigo,ContornoHorizontal);
-            boolean colisionNula3 = colisionPared3.getBoundsInLocal().isEmpty();
+            boolean colisionNula3 = !colisionPared3.getBoundsInLocal().isEmpty();
 
             // Si la colision detecta colisión:
-            if (colisionNula3 == false){
+            if (colisionNula3 == true){
                 
                 velocidadBolaY = 3;
             }
             
             // Pasos para hacer la colision de la bola con la Cara Vertical Izquierda
             Shape colisionPared4 = Shape.intersect(enemigo,ContornoVertical);
-            boolean colisionNula4 = colisionPared4.getBoundsInLocal().isEmpty();
+            boolean colisionNula4 = !colisionPared4.getBoundsInLocal().isEmpty();
             
             // Si la colision detecta colisión:
-            if (colisionNula4 == false){
+            if (colisionNula4 == true){
                 velocidadBolaX = 3 ;
                 
                 } 
             
             Shape eliminado = Shape.intersect(enemigo,tope);
-            boolean colisionNula5 = eliminado.getBoundsInLocal().isEmpty();
+            boolean colisionNula5 = !eliminado.getBoundsInLocal().isEmpty();
             
-            if (colisionNula5 == false){
+            if (colisionNula5 == true){
                 
                 this.stop();
             }
 
             Shape limite1 = Shape.intersect (tope, ContornoVertical);
-            boolean colisionNula6 = limite1.getBoundsInLocal().isEmpty();
+            boolean colisionNula6 = !limite1.getBoundsInLocal().isEmpty();
                 
-                if (colisionNula6 == false){
+                if (colisionNula6 == true){
                     velocidadGrupo = 2;
                 }
                 
             Shape limite2 = Shape.intersect (tope,ContornoVertical2);
-            boolean colisionNula7 = limite2.getBoundsInLocal().isEmpty();
+            boolean colisionNula7 = !limite2.getBoundsInLocal().isEmpty();
             
-                if (colisionNula7 == false){
+                if (colisionNula7 == true){
                     velocidadGrupo = -2;
                 }
             
