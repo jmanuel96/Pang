@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polygon;
@@ -38,7 +39,10 @@ public class PangFX extends Application {
     int velocidadGrupo = 0;
     int posicionGrupo = 0;
     int longitudArma = 0;
+    int posicionArma = 518;
     AnimationTimer enemigoBola;
+    boolean colisionNula5;
+    AnimationTimer colisiones;
     
     
     @Override
@@ -171,7 +175,7 @@ public class PangFX extends Application {
         imageView1.setY(555);
         imageView1.setScaleX(2);
         imageView1.setScaleY(2);
-        Rectangle arma = new Rectangle(677.5,518,5,longitudArma);
+        Rectangle arma = new Rectangle(677.5,posicionArma,5,longitudArma);
         Rectangle tope = new Rectangle (668,543,34,58);
         tope.setVisible(false);
         movimientoImagen.getChildren().add(imageView1);
@@ -219,6 +223,7 @@ public class PangFX extends Application {
         root.getChildren().add(puntuacion);
         root.getChildren().add(ubicacion);
         
+        
         root.getChildren().add(adorno1);
         root.getChildren().add(adorno2);
         root.getChildren().add(adorno3);
@@ -233,8 +238,6 @@ public class PangFX extends Application {
         Scene scene = new Scene (root, ancho, alto);
         
         // Cambiamos el movimiento del grupo
-
-        
 
         
         primaryStage.setTitle("PangFX");
@@ -261,7 +264,9 @@ public class PangFX extends Application {
                     break;
                 
                 case SPACE:
-                    longitudArma +=2;
+                    longitudArma +=2; 
+//                    posicionArma += 2;
+//                    arma.setLayoutY(posicionArma);
                     arma.setHeight(longitudArma);
             }
         });
@@ -289,6 +294,8 @@ public class PangFX extends Application {
 
                 
             }
+            
+            
             // Pasos para hacer la colision de la bola con la Cara Vertical Derecha
             Shape colisionPared2 = Shape.intersect(enemigo,ContornoVertical2);
             boolean colisionNula2 = !colisionPared2.getBoundsInLocal().isEmpty();
@@ -321,7 +328,7 @@ public class PangFX extends Application {
                 } 
             
             Shape eliminado = Shape.intersect(enemigo,tope);
-            boolean colisionNula5 = !eliminado.getBoundsInLocal().isEmpty();
+            colisionNula5 = !eliminado.getBoundsInLocal().isEmpty();
             
             if (colisionNula5 == true){
                 
@@ -347,9 +354,27 @@ public class PangFX extends Application {
             
             
         };
+        
+        colisiones = new AnimationTimer(){
+            @Override
+            public void handle(long now) {
+                reinicio();
+                }
+            };
+                
           enemigoBola.start();
         
     };
+    
+    
+    private void reinicio(){
+        if (colisionNula5){
+            posicionBolaX = 180;
+            posicionBolaY = 100;
+            posicionGrupo = 0;
+//            setposicionBolaX
+        }
+    }
     
     
     
