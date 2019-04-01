@@ -30,6 +30,8 @@ import javafx.stage.Stage;
  */
 public class PangFX extends Application {
     
+    // Variables que uso en mi juego
+    
     int ancho = 1366;
     int alto = 768;
     int posicionBolaX = 180;
@@ -48,7 +50,8 @@ public class PangFX extends Application {
     @Override
     public void start(Stage primaryStage) {
         
-
+        
+        // -- FONDO -- //
         
         // Elementos del borde de la pantalla del juego
         Rectangle ContornoVertical = new Rectangle(0, 0, 15, 600);
@@ -160,13 +163,12 @@ public class PangFX extends Application {
         adorno3.setFill(Color.YELLOW);
         adorno4.setFill(Color.RED);
         
+       // -- FONDO -- //
+        
         // Enemigo
         Circle enemigo = new Circle(posicionBolaX,posicionBolaY,70,Color.DARKRED);
         
-        // Rectangulo Colisión Muñeco y bola
-        //Rectangle tope = new Rectangle (657,537,50,63);
-             
-        
+ 
         // Grupo para poder realizar la colision del muñeco con la bola
         Group movimientoImagen = new Group();
         Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -237,9 +239,7 @@ public class PangFX extends Application {
         
         Scene scene = new Scene (root, ancho, alto);
         
-        // Cambiamos el movimiento del grupo
 
-        
         primaryStage.setTitle("PangFX");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -327,24 +327,30 @@ public class PangFX extends Application {
                 
                 } 
             
+            // Pasos para hacer la colision de la Bola con el Personaje
             Shape eliminado = Shape.intersect(enemigo,tope);
             colisionNula5 = !eliminado.getBoundsInLocal().isEmpty();
             
+            // Si la colision detecta colisión:
             if (colisionNula5 == true){
                 
                 this.stop();
             }
 
+            // Pasos para hacer la colision del Personaje con la Cara Vertical Izquierda
             Shape limite1 = Shape.intersect (tope, ContornoVertical);
             boolean colisionNula6 = !limite1.getBoundsInLocal().isEmpty();
-                
+              
+            // Si la colision detecta colisión:
                 if (colisionNula6 == true){
                     velocidadGrupo = 2;
                 }
                 
+            // Pasos para hacer la colision del Personaje con la Cara Vertical Derecha
             Shape limite2 = Shape.intersect (tope,ContornoVertical2);
             boolean colisionNula7 = !limite2.getBoundsInLocal().isEmpty();
             
+            // Si la colision detecta colisión:
                 if (colisionNula7 == true){
                     velocidadGrupo = -2;
                 }
