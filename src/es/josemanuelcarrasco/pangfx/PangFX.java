@@ -45,6 +45,7 @@ public class PangFX extends Application {
     AnimationTimer enemigoBola;
     boolean colisionNula5;
     AnimationTimer colisiones;
+    Pane root;
     
     
     @Override
@@ -157,11 +158,16 @@ public class PangFX extends Application {
             1291.0, 660.0,
             1316.0, 690.0});
         
+        
+        
         // Pintar los adornos
         adorno1.setFill(Color.RED);
         adorno2.setFill(Color.YELLOW);
         adorno3.setFill(Color.YELLOW);
         adorno4.setFill(Color.RED);
+        
+        
+        
         
        // -- FONDO -- //
         
@@ -171,18 +177,29 @@ public class PangFX extends Application {
  
         // Grupo para poder realizar la colision del muñeco con la bola
         Group movimientoImagen = new Group();
-        Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
-        ImageView imageView1 = new ImageView(inicial);
-        imageView1.setX((ancho/2)- 15);
-        imageView1.setY(555);
-        imageView1.setScaleX(2);
-        imageView1.setScaleY(2);
-        Rectangle arma = new Rectangle(677.5,posicionArma,5,longitudArma);
-        Rectangle tope = new Rectangle (668,543,34,58);
-        tope.setVisible(false);
-        movimientoImagen.getChildren().add(imageView1);
-        movimientoImagen.getChildren().add(tope);
-        movimientoImagen.getChildren().add(arma);
+            Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
+            ImageView imageView1 = new ImageView(inicial);
+            imageView1.setX((ancho/2)- 15);
+            imageView1.setY(555);
+            imageView1.setScaleX(2);
+            imageView1.setScaleY(2);
+            Rectangle arma = new Rectangle(677.5,posicionArma,5,longitudArma);
+            Rectangle tope = new Rectangle (668,543,34,58);
+            tope.setVisible(false);
+            movimientoImagen.getChildren().add(imageView1);
+            movimientoImagen.getChildren().add(tope);
+            movimientoImagen.getChildren().add(arma);
+            
+        //Imagen de inicio 
+            Image imagenFondo= new Image (getClass().getResourceAsStream("Imagenes/fondoInicio.jpg"));
+            ImageView fondoInicio = new ImageView();
+            
+            fondoInicio.setImage(imagenFondo);
+
+            fondoInicio.setScaleX(0.7);
+            fondoInicio.setScaleY(0.7);
+            fondoInicio.setX(-70);
+            fondoInicio.setY(-100);
         
                 
         // Pasos para introducir una imagen
@@ -234,6 +251,7 @@ public class PangFX extends Application {
         
         root.getChildren().add(enemigo);
         
+        
         root.getChildren().add(movimientoImagen);
         
         
@@ -251,28 +269,29 @@ public class PangFX extends Application {
             posicionGrupo += velocidadGrupo;
             movimientoImagen.setLayoutX(posicionGrupo);
 //            imageView1.setLayoutX(posicionGrupo);
-
         
-        scene.setOnKeyPressed((KeyEvent event) -> {
-            switch(event.getCode()){
-                case LEFT:
-                    velocidadGrupo = -2;
-                            
-                    break;
-                case RIGHT:
-                    velocidadGrupo = 2;
-                    break;
-                
-                case SPACE:
-                    longitudArma +=2; 
-//                    posicionArma += 2;
-//                    arma.setLayoutY(posicionArma);
-                    arma.setHeight(longitudArma);
-            }
-        });
-        scene.setOnKeyReleased((KeyEvent event) -> {
-            velocidadGrupo = 0;
-        });
+            scene.setOnKeyPressed((KeyEvent event) -> {
+                switch(event.getCode()){
+                    case LEFT:
+                        velocidadGrupo = -2;
+                        break;
+                    case RIGHT:
+                        velocidadGrupo = 2;
+                        break;
+                    case SPACE:
+                        longitudArma +=2; 
+    //                    posicionArma += 2;
+    //                    arma.setLayoutY(posicionArma);
+                        arma.setHeight(longitudArma);
+
+    //                case ENTER:
+    //                    fondoInicio();
+                    
+                }
+            });
+            scene.setOnKeyReleased((KeyEvent event) -> {
+                velocidadGrupo = 0;
+            });
 
                 enemigo.setLayoutX(posicionBolaX);
                 enemigo.setLayoutY(posicionBolaY);
@@ -361,6 +380,10 @@ public class PangFX extends Application {
             
         };
         
+//        public void pantallaInicio(){
+//            
+//        }
+//        
         colisiones = new AnimationTimer(){
             @Override
             public void handle(long now) {
@@ -378,11 +401,12 @@ public class PangFX extends Application {
             posicionBolaX = 180;
             posicionBolaY = 100;
             posicionGrupo = 0;
-//            setposicionBolaX
         }
     }
     
-    
+//        public void pantallainicio(){
+//        root.getChildren().add()
+//    }
     
         
         
