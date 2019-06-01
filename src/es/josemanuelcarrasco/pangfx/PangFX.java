@@ -196,10 +196,10 @@ public class PangFX extends Application {
             
             fondoInicio.setImage(imagenFondo);
 
-            fondoInicio.setScaleX(0.7);
-            fondoInicio.setScaleY(0.7);
-            fondoInicio.setX(-70);
-            fondoInicio.setY(-100);
+            fondoInicio.setScaleX(0.9);
+            fondoInicio.setScaleY(0.95);
+            fondoInicio.setX(-120);
+            fondoInicio.setY(-50);
         
                 
         // Pasos para introducir una imagen
@@ -253,6 +253,7 @@ public class PangFX extends Application {
         
         
         root.getChildren().add(movimientoImagen);
+        root.getChildren().add(fondoInicio);
         
         
         Scene scene = new Scene (root, ancho, alto);
@@ -284,8 +285,9 @@ public class PangFX extends Application {
     //                    arma.setLayoutY(posicionArma);
                         arma.setHeight(longitudArma);
 
-    //                case ENTER:
-    //                    fondoInicio();
+                    case ENTER:
+                        fondoInicio.setOpacity(0.0);
+                        break;
                     
                 }
             });
