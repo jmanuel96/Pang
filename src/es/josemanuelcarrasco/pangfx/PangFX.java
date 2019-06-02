@@ -5,6 +5,7 @@
  */
 package es.josemanuelcarrasco.pangfx;
 
+import java.net.URL;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -14,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
@@ -46,6 +49,7 @@ public class PangFX extends Application {
     boolean colisionNula5;
     AnimationTimer colisiones;
     Pane root;
+    MediaPlayer mediaplayer;
     
     
     @Override
@@ -189,6 +193,14 @@ public class PangFX extends Application {
             movimientoImagen.getChildren().add(imageView1);
             movimientoImagen.getChildren().add(tope);
             movimientoImagen.getChildren().add(arma);
+            
+            
+            
+        //Música inicio
+        
+//            final URL resource = getClass().getResource("Alejandro Sans - alma partía [Mashup].mp3");
+//            Media media = new Media(resource.toString());
+//            mediaplayer = new MediaPlayer(media);
             
         //Imagen de inicio 
             Image imagenFondo= new Image (getClass().getResourceAsStream("Imagenes/fondoInicio.jpg"));
