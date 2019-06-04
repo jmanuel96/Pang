@@ -198,9 +198,9 @@ public class PangFX extends Application {
             
         //Música inicio
         
-//            final URL resource = getClass().getResource("Alejandro Sans - alma partía [Mashup].mp3");
-//            Media media = new Media(resource.toString());
-//            mediaplayer = new MediaPlayer(media);
+            final URL resource = getClass().getResource("Musica/Musica_inicial_Pang.mp3");
+            Media media = new Media(resource.toString());
+            mediaplayer = new MediaPlayer(media);
             
         //Imagen de inicio 
             Image imagenFondo= new Image (getClass().getResourceAsStream("Imagenes/fondoInicio.jpg"));
@@ -279,6 +279,7 @@ public class PangFX extends Application {
             @Override
             public void handle(long now) {
                 
+            mediaplayer.play();
             posicionGrupo += velocidadGrupo;
             movimientoImagen.setLayoutX(posicionGrupo);
 //            imageView1.setLayoutX(posicionGrupo);
@@ -299,6 +300,7 @@ public class PangFX extends Application {
 
                     case ENTER:
                         fondoInicio.setOpacity(0.0);
+                        
                         break;
                     
                 }
