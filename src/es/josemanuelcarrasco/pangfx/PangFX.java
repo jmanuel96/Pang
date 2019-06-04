@@ -51,6 +51,8 @@ public class PangFX extends Application {
     AnimationTimer colisiones;
     Pane root;
     MediaPlayer mediaplayerInicio;
+    boolean vida1;
+    boolean vida2;
     
     
     @Override
@@ -199,21 +201,43 @@ public class PangFX extends Application {
         
         // Creacion de las X para tachar las vidas
         Group eliminaVida = new Group();
+        // Linea 1
         Line linea1 = new Line(25, 40, 5, 5);
         linea1.setLayoutX(148);
         linea1.setLayoutY(612);
         linea1.setStrokeWidth(5);
-//        linea1.setVisible(false);
         linea1.setStroke(Color.RED);
+        
+        // Linea 2
         Line linea2 = new Line(25, 40, 5, 5);
         linea2.setLayoutX(148);
         linea2.setLayoutY(612);
         linea2.setStrokeWidth(5);
-//        linea1.setVisible(false);
         linea2.setStroke(Color.RED);
         linea2.setRotate(60);
         eliminaVida.getChildren().add(linea1);
         eliminaVida.getChildren().add(linea2);
+//        eliminaVida.setVisible(false);
+        
+                // Creacion de las X para tachar las vidas
+        Group eliminaVida2 = new Group();
+        // Linea 3
+        Line linea3 = new Line(25, 40, 5, 5);
+        linea3.setLayoutX(118);
+        linea3.setLayoutY(612);
+        linea3.setStrokeWidth(5);
+        linea3.setStroke(Color.RED);
+        
+        // Linea 4
+        Line linea4 = new Line(25, 40, 5, 5);
+        linea4.setLayoutX(118);
+        linea4.setLayoutY(612);
+        linea4.setStrokeWidth(5);
+        linea4.setStroke(Color.RED);
+        linea4.setRotate(60);
+        eliminaVida2.getChildren().add(linea3);
+        eliminaVida2.getChildren().add(linea4);
+//        eliminaVida2.setVisible(false);
 
         
 
@@ -310,6 +334,8 @@ public class PangFX extends Application {
         root.getChildren().add(adorno3);
         root.getChildren().add(adorno4);
         root.getChildren().add(eliminaVida);
+        root.getChildren().add(eliminaVida2);
+
 
         
         
@@ -342,7 +368,7 @@ public class PangFX extends Application {
                     arma.setHeight(longitudArma);
 
                 case ENTER:
-                    fondoInicio.setOpacity(0.0);
+                    fondoInicio.setVisible(false);
                     mediaplayerInicio.stop();
                     enemigoBola.start();
                     break;
@@ -424,6 +450,7 @@ public class PangFX extends Application {
             if (colisionNula5 == true){
                 
                 this.stop();
+                reinicio();
             }
 
             // Pasos para hacer la colision del Personaje con la Cara Vertical Izquierda
@@ -463,11 +490,14 @@ public class PangFX extends Application {
     
     
     private void reinicio(){
-        if (colisionNula5){
-            posicionBolaX = 180;
-            posicionBolaY = 100;
-            posicionGrupo = 0;
-        }
+        
+        posicionBolaX = 180;
+        posicionBolaY = 100;
+        velocidadBolaX = 3;
+        velocidadBolaY = 3;
+        enemigoBola.start();
+        posicionGrupo = 0;
+
     }
     
 //        public void pantallainicio(){
