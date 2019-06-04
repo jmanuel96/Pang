@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -49,7 +50,7 @@ public class PangFX extends Application {
     boolean colisionNula5;
     AnimationTimer colisiones;
     Pane root;
-    MediaPlayer mediaplayer;
+    MediaPlayer mediaplayerInicio;
     
     
     @Override
@@ -100,25 +101,51 @@ public class PangFX extends Application {
         Circle elementonube8 = new Circle (940,200,25);
         
         // Elementos para la creacion de las vidas
-        Polygon cuerpovida = new Polygon (new double[]{
+//        Polygon cuerpovida = new Polygon (new double[]{
+//            120.0, 650.0,
+//            145.0, 650.0,
+//            140.0, 630.0,
+//            125.0, 630.0});
+//        Circle cabezavida = new Circle (132.5,624,7.5);
+
+//        Polygon cuerpovida2 = new Polygon (new double[]{
+//            150.0, 650.0,
+//            175.0, 650.0,
+//            170.0, 630.0,
+//            155.0, 630.0});
+//        Circle cabezavida2 = new Circle (162.5,624,7.5);
+        
+        // Pintar vida
+//        cabezavida.setFill(Color.BISQUE);
+//        cuerpovida.setFill(Color.SKYBLUE);
+//        cabezavida2.setFill(Color.BISQUE);
+//        cuerpovida2.setFill(Color.SKYBLUE);
+
+
+       // Grupos para la creacion de las vidas
+       Group vida1 = new Group();
+       Polygon cuerpovida = new Polygon (new double[]{
             120.0, 650.0,
             145.0, 650.0,
             140.0, 630.0,
             125.0, 630.0});
-        Circle cabezavida = new Circle (132.5,624,7.5);
-
+       Circle cabezavida = new Circle (132.5,624,7.5);
+       cabezavida.setFill(Color.BISQUE);
+       cuerpovida.setFill(Color.SKYBLUE);
+       vida1.getChildren().add(cabezavida);
+       vida1.getChildren().add(cuerpovida);
+        
+        Group vida2 = new Group();
         Polygon cuerpovida2 = new Polygon (new double[]{
             150.0, 650.0,
             175.0, 650.0,
             170.0, 630.0,
             155.0, 630.0});
         Circle cabezavida2 = new Circle (162.5,624,7.5);
-        
-        // Pintar vida
-        cabezavida.setFill(Color.BISQUE);
-        cuerpovida.setFill(Color.SKYBLUE);
         cabezavida2.setFill(Color.BISQUE);
         cuerpovida2.setFill(Color.SKYBLUE);
+        vida2.getChildren().add(cabezavida2);
+        vida2.getChildren().add(cuerpovida2);
                
         // Colores de la Montaña
         nievemontaña.setFill(Color.WHITE);
@@ -170,6 +197,28 @@ public class PangFX extends Application {
         adorno3.setFill(Color.YELLOW);
         adorno4.setFill(Color.RED);
         
+        // Creacion de las X para tachar las vidas
+        Group eliminaVida = new Group();
+        Line linea1 = new Line(25, 40, 5, 5);
+        linea1.setLayoutX(148);
+        linea1.setLayoutY(612);
+        linea1.setStrokeWidth(5);
+//        linea1.setVisible(false);
+        linea1.setStroke(Color.RED);
+        Line linea2 = new Line(25, 40, 5, 5);
+        linea2.setLayoutX(148);
+        linea2.setLayoutY(612);
+        linea2.setStrokeWidth(5);
+//        linea1.setVisible(false);
+        linea2.setStroke(Color.RED);
+        linea2.setRotate(60);
+        eliminaVida.getChildren().add(linea1);
+        eliminaVida.getChildren().add(linea2);
+
+        
+
+        
+        
         
         
         
@@ -200,7 +249,10 @@ public class PangFX extends Application {
         
             final URL resource = getClass().getResource("Musica/Musica_inicial_Pang.mp3");
             Media media = new Media(resource.toString());
-            mediaplayer = new MediaPlayer(media);
+            mediaplayerInicio = new MediaPlayer(media);
+            
+            // Iniciamos la musica para que al iniciar la aplicacion reproduzca el sonido
+            mediaplayerInicio.play();
             
         //Imagen de inicio 
             Image imagenFondo= new Image (getClass().getResourceAsStream("Imagenes/fondoInicio.jpg"));
@@ -245,11 +297,9 @@ public class PangFX extends Application {
         root.getChildren().add(elementonube6);
         root.getChildren().add(elementonube7);
         root.getChildren().add(elementonube8);
-        
-        root.getChildren().add(cuerpovida);
-        root.getChildren().add(cabezavida);
-        root.getChildren().add(cuerpovida2);
-        root.getChildren().add(cabezavida2);
+        root.getChildren().add(vida1);
+        root.getChildren().add(vida2);
+
         
         root.getChildren().add(puntuacion);
         root.getChildren().add(ubicacion);
@@ -259,6 +309,8 @@ public class PangFX extends Application {
         root.getChildren().add(adorno2);
         root.getChildren().add(adorno3);
         root.getChildren().add(adorno4);
+        root.getChildren().add(eliminaVida);
+
         
         
         root.getChildren().add(enemigo);
@@ -275,44 +327,46 @@ public class PangFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch(event.getCode()){
+                case LEFT:
+                    velocidadGrupo = -2;
+                    break;
+                case RIGHT:
+                    velocidadGrupo = 2;
+                    break;
+                case SPACE:
+                    longitudArma +=2; 
+//                    posicionArma += 2;
+//                    arma.setLayoutY(posicionArma);
+                    arma.setHeight(longitudArma);
+
+                case ENTER:
+                    fondoInicio.setOpacity(0.0);
+                    mediaplayerInicio.stop();
+                    enemigoBola.start();
+                    break;
+                    
+            }
+        });
+        scene.setOnKeyReleased((KeyEvent event) -> {
+            velocidadGrupo = 0;
+        });
+        
         enemigoBola = new AnimationTimer(){
             @Override
             public void handle(long now) {
                 
-            mediaplayer.play();
+            
             posicionGrupo += velocidadGrupo;
             movimientoImagen.setLayoutX(posicionGrupo);
 //            imageView1.setLayoutX(posicionGrupo);
         
-            scene.setOnKeyPressed((KeyEvent event) -> {
-                switch(event.getCode()){
-                    case LEFT:
-                        velocidadGrupo = -2;
-                        break;
-                    case RIGHT:
-                        velocidadGrupo = 2;
-                        break;
-                    case SPACE:
-                        longitudArma +=2; 
-    //                    posicionArma += 2;
-    //                    arma.setLayoutY(posicionArma);
-                        arma.setHeight(longitudArma);
 
-                    case ENTER:
-                        fondoInicio.setOpacity(0.0);
-                        
-                        break;
-                    
-                }
-            });
-            scene.setOnKeyReleased((KeyEvent event) -> {
-                velocidadGrupo = 0;
-            });
-
-                enemigo.setLayoutX(posicionBolaX);
-                enemigo.setLayoutY(posicionBolaY);
-                System.out.println(velocidadBolaX+"X");
-                System.out.println(velocidadBolaY+"Y");
+            enemigo.setLayoutX(posicionBolaX);
+            enemigo.setLayoutY(posicionBolaY);
+            System.out.println(velocidadBolaX+"X");
+            System.out.println(velocidadBolaY+"Y");
             
             // Cambiamos la posicion de la bola    
             posicionBolaX += velocidadBolaX;
@@ -396,18 +450,14 @@ public class PangFX extends Application {
             
         };
         
-//        public void pantallaInicio(){
-//            
-//        }
-//        
-        colisiones = new AnimationTimer(){
-            @Override
-            public void handle(long now) {
-                reinicio();
-                }
-            };
+
+//        colisiones = new AnimationTimer(){
+//            @Override
+//            public void handle(long now) {
+//                reinicio();
+//                }
+//            };
                 
-          enemigoBola.start();
         
     };
     
