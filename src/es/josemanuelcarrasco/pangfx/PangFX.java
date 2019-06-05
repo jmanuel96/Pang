@@ -502,16 +502,7 @@ public class PangFX extends Application {
             
             
         };
-        
-
-//        colisiones = new AnimationTimer(){
-//            @Override
-//            public void handle(long now) {
-//                reinicio();
-//                }
-//            };
-                
-        
+               
     };
     
     
@@ -541,13 +532,7 @@ public class PangFX extends Application {
         }
     }
     
-//        public void pantallainicio(){
-//        root.getChildren().add()
-//    }
     
-        
-        
-  
     
     /**
      * @param args the command line arguments
