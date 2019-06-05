@@ -55,6 +55,9 @@ public class PangFX extends Application {
     boolean vida2 = true;
     Group eliminaVida2 = new Group();
     Group eliminaVida = new Group();
+    Text quitaVida1 = new Text();
+    Text quitaVida2 = new Text();
+    Text finJuego = new Text();
     
     
     @Override
@@ -287,7 +290,26 @@ public class PangFX extends Application {
             fondoInicio.setScaleY(0.95);
             fondoInicio.setX(-120);
             fondoInicio.setY(-50);
+            
+        // Texto vidas
+
+        quitaVida1.setFont (Font.font(50));
+        quitaVida1.setFill (Color.DARKSLATEBLUE);
+        quitaVida1.setLayoutX (ancho/2 -600);
+        quitaVida1.setLayoutY (alto/2 - 200);
         
+        quitaVida2.setFont (Font.font(50));
+        quitaVida2.setFill (Color.DARKSLATEBLUE);
+        quitaVida2.setLayoutX (ancho/2 -600);
+        quitaVida2.setLayoutY (alto/2 - 200);
+        
+        
+        // Texto Fin del Juego
+        
+        finJuego.setFont (Font.font(150));
+        finJuego.setFill (Color.DARKSLATEBLUE);
+        finJuego.setLayoutX (ancho/2 -550);
+        finJuego.setLayoutY (alto/2 - 200);
                 
         // Pasos para introducir una imagen
         //Image inicial = new Image(getClass().getResourceAsStream("Imagenes/dssd.png"));
@@ -344,6 +366,11 @@ public class PangFX extends Application {
         
         root.getChildren().add(movimientoImagen);
         root.getChildren().add(fondoInicio);
+        root.getChildren().add(quitaVida1);
+        root.getChildren().add(quitaVida2);
+        root.getChildren().add(finJuego);
+
+
         
         
         Scene scene = new Scene (root, ancho, alto);
@@ -377,6 +404,8 @@ public class PangFX extends Application {
                    
                 case Y:
                     reinicio();
+                    quitaVida1.setVisible(false);
+                    quitaVida2.setVisible(false);
                     break;
                     
             }
@@ -457,6 +486,7 @@ public class PangFX extends Application {
                 
                 this.stop();
                 quitarVida();
+                enemigoBola.stop();
             }
 
             // Pasos para hacer la colision del Personaje con la Cara Vertical Izquierda
@@ -522,13 +552,17 @@ public class PangFX extends Application {
         if (vida2 == true){
             eliminaVida2.setVisible (true);
             vida2 = false;
+            quitaVida1.setText("Has perdido una vida. Pulsa Y para intentarlo otra vez");
             this.reinicio();
         } else if(vida1 == true) {
             eliminaVida.setVisible (true);
             vida1 = false;
+            quitaVida2.setVisible(true);
+            quitaVida2.setText("Has perdido otra vida. Pulsa Y para intentarlo otra vez");
             this.reinicio();
         } else{
             enemigoBola.stop();
+            finJuego.setText("Fin de la partida");
         }
     }
     
