@@ -51,8 +51,10 @@ public class PangFX extends Application {
     AnimationTimer colisiones;
     Pane root;
     MediaPlayer mediaplayerInicio;
-    boolean vida1;
-    boolean vida2;
+    boolean vida1 = true;    
+    boolean vida2 = true;
+    Group eliminaVida2 = new Group();
+    Group eliminaVida = new Group();
     
     
     @Override
@@ -200,7 +202,6 @@ public class PangFX extends Application {
         adorno4.setFill(Color.RED);
         
         // Creacion de las X para tachar las vidas
-        Group eliminaVida = new Group();
         // Linea 1
         Line linea1 = new Line(25, 40, 5, 5);
         linea1.setLayoutX(148);
@@ -217,10 +218,9 @@ public class PangFX extends Application {
         linea2.setRotate(60);
         eliminaVida.getChildren().add(linea1);
         eliminaVida.getChildren().add(linea2);
-//        eliminaVida.setVisible(false);
+        eliminaVida.setVisible(false);
         
-                // Creacion de las X para tachar las vidas
-        Group eliminaVida2 = new Group();
+        // Creacion de las X para tachar las vidas
         // Linea 3
         Line linea3 = new Line(25, 40, 5, 5);
         linea3.setLayoutX(118);
@@ -237,7 +237,7 @@ public class PangFX extends Application {
         linea4.setRotate(60);
         eliminaVida2.getChildren().add(linea3);
         eliminaVida2.getChildren().add(linea4);
-//        eliminaVida2.setVisible(false);
+        eliminaVida2.setVisible(false);
 
         
 
@@ -265,7 +265,6 @@ public class PangFX extends Application {
             tope.setVisible(false);
             movimientoImagen.getChildren().add(imageView1);
             movimientoImagen.getChildren().add(tope);
-            movimientoImagen.getChildren().add(arma);
             
             
             
@@ -327,6 +326,7 @@ public class PangFX extends Application {
         
         root.getChildren().add(puntuacion);
         root.getChildren().add(ubicacion);
+        root.getChildren().add(arma);
         
         
         root.getChildren().add(adorno1);
@@ -362,15 +362,21 @@ public class PangFX extends Application {
                     velocidadGrupo = 2;
                     break;
                 case SPACE:
-                    longitudArma +=2; 
-//                    posicionArma += 2;
-//                    arma.setLayoutY(posicionArma);
+                    longitudArma +=20; 
+                    posicionArma -= 20;
+                    arma.setX(movimientoImagen.getLayoutX()+ 677);
+                    arma.setY(posicionArma);
                     arma.setHeight(longitudArma);
+                    break;
 
                 case ENTER:
                     fondoInicio.setVisible(false);
                     mediaplayerInicio.stop();
                     enemigoBola.start();
+                    break;
+                   
+                case Y:
+                    reinicio();
                     break;
                     
             }
@@ -450,7 +456,7 @@ public class PangFX extends Application {
             if (colisionNula5 == true){
                 
                 this.stop();
-                reinicio();
+                quitarVida();
             }
 
             // Pasos para hacer la colision del Personaje con la Cara Vertical Izquierda
@@ -470,6 +476,26 @@ public class PangFX extends Application {
                 if (colisionNula7 == true){
                     velocidadGrupo = -2;
                 }
+                
+            Shape limiteMuerte = Shape.intersect (arma, enemigo);
+            boolean colisionNula8 = limiteMuerte.getBoundsInLocal().isEmpty();
+            
+            // Si se detecta la colision
+                if (colisionNula8 == false){
+                    enemigoBola.stop();
+//                    ar
+                }
+            Shape limiteArma = Shape.intersect(arma, ContornoHorizontal);
+            boolean colisionNula9 = limiteArma.getBoundsInLocal().isEmpty();
+            
+            // Si la colision detecta colision
+                if (colisionNula9 == false){
+                    posicionArma = 518;
+                  
+                    longitudArma +=2; 
+                    posicionArma -= 20;
+                }
+            
             
             }
             
@@ -497,7 +523,22 @@ public class PangFX extends Application {
         velocidadBolaY = 3;
         enemigoBola.start();
         posicionGrupo = 0;
+        
 
+    }
+    
+    public void quitarVida(){
+        if (vida2 == true){
+            eliminaVida2.setVisible (true);
+            vida2 = false;
+            this.reinicio();
+        } else if(vida1 == true) {
+            eliminaVida.setVisible (true);
+            vida1 = false;
+            this.reinicio();
+        } else{
+            enemigoBola.stop();
+        }
     }
     
 //        public void pantallainicio(){
